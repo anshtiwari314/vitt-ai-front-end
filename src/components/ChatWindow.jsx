@@ -14,6 +14,7 @@ import { Dot } from 'react-animated-dots';
 import Image_message from "./Image_message";
 import useLocalStorage, {clearFromLocalStorage} from "../utils/useLocalStorage";
 import {uuid} from "../utils/utils";
+import LineGraph from "./LineGraph"
 
 function ChatWindow(props) {
 	//"004f1836-15ce-11eb-a4c1-023dd4e3dfca"
@@ -136,7 +137,8 @@ function ChatWindow(props) {
 	/*Mapping Text(speech) messages values which are in value array */
 
 	var receives = value.map((m, i) => {
-		// console.log("type:" + m.type + " pos:" + i);
+		//console.log("type:" + m.type + " pos:" + i);
+
 		if (m.query !== "") {
 			if (m.type == "receive") {
 				return <Receive key={i} query={m.query} time={m.time} />;
@@ -720,8 +722,8 @@ function ChatWindow(props) {
 
 	/**Return Type */
 	return (
-		<div class={"jcb " + maximizeChatBot}>
-			<div class="jcb_blackScreenShadow_chatBot"></div>
+		<div className={"jcb " + maximizeChatBot}>
+			<div className="jcb_blackScreenShadow_chatBot"></div>
 			<div
 				className="jcb_chat-window jcb_chatbotAnimationClassFadeIn"
 				id="jcb_chatBot-id"
@@ -730,8 +732,8 @@ function ChatWindow(props) {
 				<div className="jcb_panel-default">
 					<div className="jcb_panel-logo-wrapper">
 						<div style={{ textAlign: "right" }} className="jcb_action-btn">
-							<img alt="maximize_icon" class="jcb_maximize-icon-heading-chatbot" onClick={(m) => { m.preventDefault(); onMaximizeChatBot(); }} src={maxOrMinIcon} />
-							<img alt="close_icon" style={{ cursor: "pointer" }} class="close-icon-heading-chatbot" onClick={(m) => {
+							<img alt="maximize_icon" className="jcb_maximize-icon-heading-chatbot" onClick={(m) => { m.preventDefault(); onMaximizeChatBot(); }} src={maxOrMinIcon} />
+							<img alt="close_icon" style={{ cursor: "pointer" }} className="close-icon-heading-chatbot" onClick={(m) => {
 								m.preventDefault();
 								setMaximizeChatBot(""); props.closeChatbot(); setBottomSheet({ bottomSheet: false })
 							}} src="/images/remove.png" />
@@ -747,12 +749,19 @@ function ChatWindow(props) {
 						Aditya Birla Finance Limited (AMFI registered Mutual Fund Distributor)
 					</div>
 					<div className="panel-body jcb_msg_container_base">
+						
+							{/*	height & width props can be passed */}
+							<LineGraph />
+						
+							
+						
+						
 
 						{receives}
 						
 						{loader !== -1 ? <div className="jcb_loader_animation_chatbot"><Dot>.</Dot><Dot>.</Dot><Dot>.</Dot> </div> : null}
 						{recievesButton.length !== 0 ? <div className="row jcb_msg_container ">
-							<div class="jcb_btn_messs">{recievesButton}</div>
+							<div className="jcb_btn_messs">{recievesButton}</div>
 						</div> : null}
 						<div ref={messagesEndRef} />
 
